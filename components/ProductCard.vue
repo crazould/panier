@@ -1,57 +1,48 @@
 <template>
-  <ul>
-    <li class="card" v-for="product in products" :key="product.id">
-      <div class="card-header">
-        <div class="thumbnail-wrapper">
-          <img
-            class="thumbnail"
-            :src="product.thumbnail"
-            :alt="`${product.title} thumbnail image`"
-          />
-        </div>
-        <p class="category">{{ product.category }}</p>
+  <li class="card" :key="product.id">
+    <div class="card-header">
+      <div class="thumbnail-wrapper">
+        <img
+          class="thumbnail"
+          :src="product.thumbnail"
+          :alt="`${product.title} thumbnail image`"
+        />
       </div>
-      <div class="card-body">
-        <h2 class="name">{{ product.title }}</h2>
-        <p class="desc">
-          {{
-            product.description.length >= 54
-              ? `${product.description.substring(0, 54)}...`
-              : product.description
-          }}
-        </p>
-        <p class="disc-price">
-          {{
-            `$${Math.round(
-              product.price - (product.price * product.discountPercentage) / 100
-            )}`
-          }}
-        </p>
-        <div class="discount">
-          <span class="percentage">{{ `${product.discountPercentage}%` }}</span>
-          <span class="price">{{ `$${product.price}` }}</span>
-        </div>
-        <div class="rating">
-          {{ `${product.rating}` }}
-        </div>
+      <p class="category">{{ product.category }}</p>
+    </div>
+    <div class="card-body">
+      <h2 class="name">{{ product.title }}</h2>
+      <p class="desc">
+        {{
+          product.description.length >= 54
+            ? `${product.description.substring(0, 54)}...`
+            : product.description
+        }}
+      </p>
+      <p class="disc-price">
+        {{
+          `$${Math.round(
+            product.price - (product.price * product.discountPercentage) / 100
+          )}`
+        }}
+      </p>
+      <div class="discount">
+        <span class="percentage">{{ `${product.discountPercentage}%` }}</span>
+        <span class="price">{{ `$${product.price}` }}</span>
       </div>
-      <div class="card-footer">
-        <button class="add-btn" v-on:click="addToCart(product)">
-          Add To Cart
-        </button>
+      <div class="rating">
+        {{ `${product.rating}` }}
       </div>
-    </li>
-  </ul>
+    </div>
+    <div class="card-footer">
+      <button class="add-btn" v-on:click="addToCart(product)">
+        Add To Cart
+      </button>
+    </div>
+  </li>
 </template>
 
 <style scoped>
-ul {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-gap: 40px;
-  column-gap: 40px;
-  max-width: calc(376px * 4 + 40px * 3);
-}
 .card {
   box-shadow: 0px 15px 50px rgba(108, 146, 181, 0.15);
   border-radius: 25px;
@@ -151,7 +142,7 @@ ul {
   border: none;
   border-radius: 15px;
   cursor: pointer;
-  box-shadow:  0 25px 25px -12px rgb(1 172 196 / 0.25);
+  box-shadow: 0 25px 25px -12px rgb(1 172 196 / 0.25);
 }
 </style>
 
@@ -173,10 +164,10 @@ export interface Product {
 }
 
 export default Vue.extend({
-  name: "ProductList",
+  name: "ProductCard",
   props: {
-    products: {
-      type: Array as PropType<Product[]>,
+    product: {
+      type: Object as PropType<Product>,
       required: true,
     },
     carts: {
@@ -200,6 +191,6 @@ export default Vue.extend({
         });
       }
     },
-  },
+  }
 });
 </script>

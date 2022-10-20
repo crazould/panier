@@ -4,7 +4,14 @@
     <main>
       <div class="wrapper">
         <ShoppingCart :carts="carts" />
-        <ProductList :products="products" :carts="carts" />
+        <ul class="product-list">
+          <ProductCard
+            v-for="product in products"
+            :key="product.id"
+            :product="product"
+            :carts="carts"
+          />
+        </ul>
       </div>
     </main>
     <Footer />
@@ -12,24 +19,31 @@
 </template>
 
 <style scoped>
-  .wrapper{
-    margin: auto;
-    padding: 1rem;
-  }
+.wrapper {
+  margin: auto;
+  padding: 1rem;
+}
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-gap: 40px;
+  column-gap: 40px;
+  max-width: calc(376px * 4 + 40px * 3);
+}
 </style>
 
 <script lang="ts">
 import Vue from "vue";
-import Header from "@/components/Header.vue"
-import Footer from "@/components/Footer.vue"
-import ProductList, { Product } from "@/components/ProductList.vue"
-import ShoppingCart, {Cart} from "@/components/ShoppingCart.vue"
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import ShoppingCart, { Cart } from "@/components/ShoppingCart.vue";
+import ProductCard, { Product } from "@/components/ProductCard.vue";
 
 interface ProductResponse {
-  products: Product[]
-  total: number
-  skip: number
-  limit: number
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
 }
 
 export default Vue.extend({
@@ -37,18 +51,18 @@ export default Vue.extend({
   components: {
     Header,
     Footer,
-    ProductList,
     ShoppingCart,
+    ProductCard,
   },
   data: () => ({
     products: [] as Product[],
-    carts: [] as Cart[]
+    carts: [] as Cart[],
   }),
   async fetch() {
     this.products = await fetch("https://dummyjson.com/products").then(
       async (res) => {
         const data = await (res.json() as Promise<ProductResponse>);
-        return data.products
+        return data.products;
       }
     );
   },
