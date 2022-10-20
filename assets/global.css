@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap');
 
+:root{
+  --primary-color: #fafafa;
+  --secondary-color: #18181b;
+  --accent-color: linear-gradient(311.55deg, #01ACC4 7.49%, #29C7CF 50.69%, #4CCBCE 111.84%);
+  --warning-color: #FFC226;
+  --danger-color: #ED3C47;
+  --muted-color: #a1a1aa;
+}
 
 * {
   font-family: 'Poppins', sans-serif;
@@ -8,4 +16,8 @@
 
 body{
   margin: 0;
+}
+
+main {
+  min-height: 90vh;
 }

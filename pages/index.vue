@@ -1,33 +1,35 @@
 <template>
   <div>
-    <header>
-      <h1>Panier - Shopping Cart App</h1>
-    </header>
+    <Header />
     <main>
-
+      {{products}}
     </main>
-    <footer>© {{ year }} Thariq, All right reserved</footer>
+    <Footer />
   </div>
 </template>
 
 <style scoped>
-  main{
-    min-height: 90vh;
-  }
+
 </style>
 
 <script lang="ts">
 import Vue from "vue";
+import Header from "../components/Header.vue"
+import Footer from "../components/Footer.vue"
 
 export default Vue.extend({
   name: "IndexPage",
-  computed: {
-    year() {
-      return new Date().getFullYear();
-    },
+  components: {
+    Header,
+    Footer
   },
-  data() {
-    return {};
+  data: () => ({
+    products: [],
+  }),
+  async fetch() {
+    this.products = await fetch("https://dummyjson.com/products").then(
+      (res) => res.json()
+    );
   },
 });
 </script>
