@@ -12,30 +12,21 @@
     </div>
     <div class="card-body">
       <h2 class="name">{{ product.title }}</h2>
-      <p class="desc">
-        {{
-          product.description.length >= 54
-            ? `${product.description.substring(0, 54)}...`
-            : product.description
-        }}
-      </p>
-      <p class="disc-price">
-        {{
-          `$${Math.round(
-            product.price - (product.price * product.discountPercentage) / 100
-          )}`
-        }}
-      </p>
+      <p class="desc">{{ productDesc }}</p>
+      <p class="disc-price">{{ productDiscPrice }}</p>
       <div class="discount">
         <span class="percentage">{{ `${product.discountPercentage}%` }}</span>
         <span class="price">{{ `$${product.price}` }}</span>
       </div>
-      <div class="rating">
-        {{ `${product.rating}` }}
-      </div>
+      <div class="rating">{{ `${product.rating}` }}</div>
     </div>
     <div class="card-footer">
-      <button class="add-btn" v-on:click="addToCart(product)">
+      <div v-if="addedCart.quantity" class="quantity-group">
+        <button v-on:click="decreaseQuantity()">-</button>
+        <span>{{ addedCart.quantity }}</span>
+        <button v-on:click="increaseQuantity()">+</button>
+      </div>
+      <button v-else class="add-btn" v-on:click="addToCart(product)">
         Add To Cart
       </button>
     </div>
@@ -175,22 +166,59 @@ export default Vue.extend({
       required: true,
     },
   },
+  computed: {
+    productDesc() {
+      return this.product.description.length >= 54
+        ? `${this.product.description.substring(0, 54)}...`
+        : this.product.description;
+    },
+    productDiscPrice() {
+      return `$${Math.round(
+        this.product.price -
+          (this.product.price * this.product.discountPercentage) / 100
+      )}`;
+    },
+    addedCart() {
+      const addedCart = this.carts.find(
+        (cart) => cart.product.id === this.product.id
+      );
+      if (addedCart) return addedCart;
+      else return { product: null, quantity: 0 } as Cart;
+    },
+    addedCartIdx() {
+      return this.carts.findIndex(
+        (cart) => cart.product.id === this.product.id
+      );
+    },
+  },
+  data: () => ({}),
   methods: {
     addToCart(product: Product) {
-      const oldCart = this.carts.find((cart) => cart.product.id === product.id);
-      if (oldCart) {
-        oldCart.quantity += 1;
+      this.carts.push({
+        product,
+        quantity: 1,
+      });
+    },
+    increaseQuantity() {
+      this.addedCart.quantity += 1;
+      this.carts.map((cart) => {
+        if (cart.product.id === this.addedCart.product.id)
+          return this.addedCart;
+        else return cart;
+      });
+    },
+    decreaseQuantity() {
+      this.addedCart.quantity -= 1;
+      if (this.addedCart.quantity > 0) {
         this.carts.map((cart) => {
-          if (cart.product.id === oldCart.product.id) return oldCart;
+          if (cart.product.id === this.addedCart.product.id)
+            return this.addedCart;
           else return cart;
         });
-      } else if (!oldCart) {
-        this.carts.push({
-          product,
-          quantity: 1,
-        });
+      } else {
+        this.carts.splice(this.addedCartIdx, 1);
       }
     },
-  }
+  },
 });
 </script>
