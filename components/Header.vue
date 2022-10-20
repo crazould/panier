@@ -1,6 +1,6 @@
 <template lang="">
     <header>
-      <h1>Panier - Shopping Cart App</h1>
+      <h1>Panier | Shopping Cart App</h1>
     </header>
 </template>
 

@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <footer>
     © {{ new Date().getFullYear() }} Thariq, All right reserved
   </footer>
