@@ -1,23 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Poppins&family=Roboto&display=swap');
 
 :root{
   --primary-color: #fafafa;
-  --secondary-color: #18181b;
-  --accent-color: linear-gradient(311.55deg, #01ACC4 7.49%, #29C7CF 50.69%, #4CCBCE 111.84%);
-  --warning-color: #FFC226;
-  --danger-color: #ED3C47;
-  --muted-color: #a1a1aa;
+  --secondary-color: #404145;
+  --accent-color: linear-gradient(311.55deg, rgb(1, 172, 196) 7.49%, rgb(41, 199, 207) 50.69%, #4CCBCE 111.84%);
+  --warning-color: #ffc226;
+  --danger-color: #ed3c47;
+  --muted-color: #b6b6b6;
 }
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Mulish', sans-serif;
   box-sizing: border-box;
-}
-
-body{
   margin: 0;
+  padding: 0;
 }
 
 main {
   min-height: 90vh;
+}
+
+li {
+  list-style: none;
 }
