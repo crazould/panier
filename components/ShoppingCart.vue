@@ -118,7 +118,7 @@
 
 @media screen and (min-width: 1440px) {
   .shopping-cart {
-    margin-left: 16px;
+    margin-left: 24px;
     margin-bottom: 0px;
   }
 }
@@ -193,6 +193,11 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 250ms;
+}
+
+.checkout-btn:hover {
+  box-shadow: 0 25px 25px 0px rgb(1 172 196 / 0.3);
 }
 </style>
 

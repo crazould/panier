@@ -157,6 +157,24 @@
   padding-top: 15px;
 }
 
+.quantity-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+.quantity-group span {
+  margin-inline: 1rem;
+}
+.quantity-group button {
+  color: rgba(1, 172, 196, 1);
+  background-color: rgba(1, 172, 196, 0.2);
+  border: none;
+  font-size: 24px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
 .add-btn {
   padding-block: 1.1rem;
   width: 100%;
@@ -171,6 +189,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 250ms;
+}
+
+.add-btn:hover {
+  box-shadow: 0 25px 25px 0px rgb(1 172 196 / 0.3);
 }
 </style>
 
