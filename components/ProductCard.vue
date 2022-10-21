@@ -183,7 +183,7 @@ export default Vue.extend({
         (cart) => cart.product.id === this.product.id
       );
       if (addedCart) return addedCart;
-      else return { product: null, quantity: 0 } as Cart;
+      else return { product: null, quantity: 0 };
     },
     addedCartIdx() {
       return this.carts.findIndex(
@@ -202,7 +202,10 @@ export default Vue.extend({
     increaseQuantity() {
       this.addedCart.quantity += 1;
       this.carts.map((cart) => {
-        if (cart.product.id === this.addedCart.product.id)
+        if (
+          this.addedCart.product &&
+          cart.product.id === this.addedCart.product.id
+        )
           return this.addedCart;
         else return cart;
       });
@@ -211,7 +214,10 @@ export default Vue.extend({
       this.addedCart.quantity -= 1;
       if (this.addedCart.quantity > 0) {
         this.carts.map((cart) => {
-          if (cart.product.id === this.addedCart.product.id)
+          if (
+            this.addedCart.product &&
+            cart.product.id === this.addedCart.product.id
+          )
             return this.addedCart;
           else return cart;
         });
