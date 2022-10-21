@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Header></Header>
     <main>
       <div class="wrapper">
         <ShoppingCart :carts="carts" />
@@ -14,7 +14,7 @@
         </ul>
       </div>
     </main>
-    <Footer />
+    <Footer></Footer>
   </div>
 </template>
 
@@ -22,13 +22,41 @@
 .wrapper {
   margin: auto;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 .product-list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-gap: 40px;
-  column-gap: 40px;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   max-width: calc(376px * 4 + 40px * 3);
+  grid-gap: 36px;
+}
+
+@media screen and (min-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .product-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-gap: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .product-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .wrapper {
+    padding-block: 2rem;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-start;
+  }
 }
 </style>
 
